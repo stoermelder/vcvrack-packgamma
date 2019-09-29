@@ -1,0 +1,22 @@
+{
+	"slug": "Stoermelder-PG",
+	"version": "1.0.0",
+	"license": "GPL-3.0-only",
+	"author": "Benjamin Dill",
+	"name": "PackGamma",
+	"brand": "stoermelder",	
+	"authorEmail": "stoermelder@outlook.com",
+	"pluginUrl": "https://github.com/stoermelder/vcvrack-packgamma",
+	"authorUrl": "https://github.com/stoermelder",
+	"sourceUrl": "https://github.com/stoermelder/vcvrack-packgamma.git",
+
+	"modules": [
+		{
+			"slug": "FreezeMk1",
+			"name": "Freeze Mk1",
+			"description": "",
+			"tags": [],
+			"disabled": true
+		}	
+	]
+}
