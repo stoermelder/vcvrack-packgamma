@@ -23,8 +23,8 @@ struct DecayMk1Module : Module {
 		NUM_LIGHTS
 	};
 
-	gam::Decay<> env;	// Exponentially decaying envelope
-	dsp::SchmittTrigger gateTrigger;
+	gam::Decay<> env[PORT_MAX_CHANNELS];	// Exponentially decaying envelope
+	dsp::SchmittTrigger gateTrigger[PORT_MAX_CHANNELS];
 
 	DecayMk1Module() {
 		config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS);
@@ -35,20 +35,24 @@ struct DecayMk1Module : Module {
 
 	void process(const ProcessArgs &args) override {
 		gam::Domain::master().spu(args.sampleRate);
+		int c = inputs[GATE_INPUT].getChannels();
+		outputs[ENV_OUTPUT].setChannels(c);
 
-		if (gateTrigger.process(inputs[GATE_INPUT].getVoltage())) {
-			float ampParam = params[AMP_PARAM].getValue();
-			float amp = inputs[AMP_INPUT].isConnected() ? inputs[AMP_INPUT].getVoltage() * ampParam / 10.f : ampParam;
+		for (int i = 0; i < c; i++) {
+			if (gateTrigger[i].process(inputs[GATE_INPUT].getVoltage(i))) {
+				float ampParam = params[AMP_PARAM].getValue();
+				float amp = inputs[AMP_INPUT].isConnected() ? inputs[AMP_INPUT].getVoltage() * ampParam / 10.f : ampParam;
 
-			float decayParam = params[DECAY_PARAM].getValue();
-			float decay = inputs[DECAY_INPUT].isConnected() ? inputs[DECAY_INPUT].getVoltage() * decayParam / 10.f : decayParam;
+				float decayParam = params[DECAY_PARAM].getValue();
+				float decay = inputs[DECAY_INPUT].isConnected() ? inputs[DECAY_INPUT].getVoltage() * decayParam / 10.f : decayParam;
 
-			env.decay(decay);		// Set decay length in seconds
-			env.reset(ampParam);	// Reset envelope and specify amplitude
+				env[i].decay(decay);	// Set decay length in seconds
+				env[i].reset(amp);		// Reset envelope and specify amplitude
+			}
+
+			float s = env[i]();
+			outputs[ENV_OUTPUT].setVoltage(s, i);
 		}
-
-		float s = env();
-		outputs[ENV_OUTPUT].setVoltage(s);
 	}
 };
 

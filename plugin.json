@@ -22,7 +22,7 @@
 			"slug": "Decay-Mk1",
 			"name": "DEC Mk1",
 			"description": "",
-			"tags": []
+			"tags": ["Envelope generator", "Polyphonic"]
 		}	
 	]
 }
