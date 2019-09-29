@@ -68,8 +68,8 @@ struct DecayMk1Widget : ModuleWidget {
 		addParam(createParamCentered<Trimpot>(Vec(22.5f, 153.7f), module, DecayMk1Module::DECAY_PARAM));
 		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 195.2f), module, DecayMk1Module::AMP_INPUT));
 		addParam(createParamCentered<Trimpot>(Vec(22.5f, 220.3f), module, DecayMk1Module::AMP_PARAM));
-		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 261.2f), module, DecayMk1Module::GATE_INPUT));
-		addOutput(createOutputCentered<PJ301MPort>(Vec(22.5f, 304.5f), module, DecayMk1Module::ENV_OUTPUT));
+		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 280.6f), module, DecayMk1Module::GATE_INPUT));
+		addOutput(createOutputCentered<PJ301MPort>(Vec(22.5f, 323.8f), module, DecayMk1Module::ENV_OUTPUT));
 	}
 };
 
