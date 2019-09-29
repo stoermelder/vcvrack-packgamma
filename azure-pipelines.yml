@@ -83,7 +83,7 @@ jobs:
 
   - task: PublishPipelineArtifact@0
     inputs:
-      artifactName: 'PACKGAMMA_ZIP_MACOS'  
+      artifactName: 'PACKGAMMA_ZIP_MACOS'
       targetPath: 'products_mac/'
     displayName: Publish macOS Zip
     condition: variables.isMac
@@ -121,7 +121,7 @@ jobs:
      ls -l $(Build.ArtifactStagingDirectory)
      export EXTEND_TAG=`date "+%Y%m%d"`
      for file in $(Build.ArtifactStagingDirectory)/*.zip; do mv "$file" "${file/.zip/-${EXTEND_TAG}.zip}"; done
-     ls -l $(Build.ArtifactStagingDirectory)         
+     ls -l $(Build.ArtifactStagingDirectory)
     displayName: Tag asset names with Date
 
   - bash: |

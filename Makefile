@@ -20,7 +20,6 @@ DEPS += $(gamma)
 
 $(gamma):
 	cd dep/Gamma && $(MAKE) NO_AUDIO_IO=1 NO_SOUNDFILE=1
-	cd dep/Gamma && $(MAKE) install NO_AUDIO_IO=1 NO_SOUNDFILE=1
 
 
 include $(RACK_DIR)/plugin.mk
