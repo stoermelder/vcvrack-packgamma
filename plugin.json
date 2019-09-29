@@ -17,6 +17,12 @@
 			"description": "",
 			"tags": [],
 			"disabled": true
+		},
+		{
+			"slug": "Decay-Mk1",
+			"name": "DEC Mk1",
+			"description": "",
+			"tags": []
 		}	
 	]
 }
