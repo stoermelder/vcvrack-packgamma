@@ -7,10 +7,10 @@
 #include "Gamma/Oscillator.h"
 #pragma GCC diagnostic pop
 
-namespace OphMk1 {
+namespace SineMk1 {
 
 // based on examples/synthesis/pmFeedback.cpp
-struct OphMk1Module : Module {
+struct SineMk1Module : Module {
 	enum ParamIds {
 		FBK_PARAM,
 		FBKTAPER_PARAM,
@@ -35,7 +35,7 @@ struct OphMk1Module : Module {
 	float prev[PORT_MAX_CHANNELS];
 	float cvs[PORT_MAX_CHANNELS] = {};
 
-	OphMk1Module() {
+	SineMk1Module() {
 		config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS);
 		configParam(FBK_PARAM, 0.f, 1.f, 1.f, "Feedback amount");
 		configParam(FREQ_PARAM, -54.f, 54.f, 0.f, "Frequency", " Hz", dsp::FREQ_SEMITONE, dsp::FREQ_C4);
@@ -81,26 +81,26 @@ struct OphMk1Module : Module {
 	}
 };
 
-struct OphMk1Widget : ModuleWidget {
-	OphMk1Widget(OphMk1Module* module) {
+struct SineMk1Widget : ModuleWidget {
+	SineMk1Widget(SineMk1Module* module) {
 		setModule(module);
-		setPanel(APP->window->loadSvg(asset::plugin(pluginInstance, "res/OphMk1.svg")));
+		setPanel(APP->window->loadSvg(asset::plugin(pluginInstance, "res/SineMk1.svg")));
 
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, 0)));
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 83.4f), module, OphMk1Module::FBK_INPUT));
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 108.5f), module, OphMk1Module::FBK_PARAM));
-		addParam(createParamCentered<CKSSH>(Vec(22.5f, 139.8f), module, OphMk1Module::FBKTAPER_PARAM));
+		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 83.4f), module, SineMk1Module::FBK_INPUT));
+		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 108.5f), module, SineMk1Module::FBK_PARAM));
+		addParam(createParamCentered<CKSSH>(Vec(22.5f, 139.8f), module, SineMk1Module::FBKTAPER_PARAM));
 
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 205.2f), module, OphMk1Module::FREQ_PARAM));
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 235.2f), module, OphMk1Module::FINE_PARAM));
+		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 208.1f), module, SineMk1Module::FREQ_PARAM));
+		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 238.2f), module, SineMk1Module::FINE_PARAM));
 
-		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 280.6f), module, OphMk1Module::VOCT_INPUT));
-		addOutput(createOutputCentered<PJ301MPort>(Vec(22.5f, 323.8f), module, OphMk1Module::OUTPUT));
+		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 280.6f), module, SineMk1Module::VOCT_INPUT));
+		addOutput(createOutputCentered<PJ301MPort>(Vec(22.5f, 323.8f), module, SineMk1Module::OUTPUT));
 	}
 };
 
-} // namespace OphMk1
+} // namespace SineMk1
 
-Model* modelOphMk1 = createModel<OphMk1::OphMk1Module, OphMk1::OphMk1Widget>("Oph-Mk1");
+Model* modelSineMk1 = createModel<SineMk1::SineMk1Module, SineMk1::SineMk1Widget>("Sine-Mk1");

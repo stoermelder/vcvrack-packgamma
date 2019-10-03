@@ -31,16 +31,16 @@
 			"tags": ["Polyphonic"]
 		},
 		{
-			"slug": "Oph-Mk1",
-			"name": "Gamma OPH Mk1",
-			"description": "",
+			"slug": "Sine-Mk1",
+			"name": "Gamma SINE Mk1",
+			"description": "Sine osciallator with feedback phase modulation",
 			"tags": ["Polyphonic"]
 		},
 		{
 			"slug": "Wall-Mk1",
 			"name": "Gamma WALL Mk1",
 			"description": "",
-			"tags": ["Polyphonic"]
+			"tags": [""]
 		}
 	]
 }
