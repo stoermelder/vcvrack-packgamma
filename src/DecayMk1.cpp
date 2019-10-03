@@ -1,5 +1,4 @@
 #include "plugin.hpp"
-#include "components.hpp"
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wsuggest-override"
