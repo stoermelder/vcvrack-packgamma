@@ -8,4 +8,5 @@ void init(rack::Plugin* p) {
 
 	p->addModel(modelFreezeMk1);
 	p->addModel(modelDecayMk1);
+	p->addModel(modelBitMk1);
 }

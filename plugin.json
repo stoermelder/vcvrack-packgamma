@@ -20,9 +20,15 @@
 		},
 		{
 			"slug": "Decay-Mk1",
-			"name": "DEC Mk1",
+			"name": "Gamma DEC Mk1",
 			"description": "",
 			"tags": ["Envelope generator", "Polyphonic"]
-		}	
+		},
+		{
+			"slug": "Bit-Mk1",
+			"name": "Gamma BIT Mk1",
+			"description": "",
+			"tags": ["Polyphonic"]
+		}
 	]
 }
