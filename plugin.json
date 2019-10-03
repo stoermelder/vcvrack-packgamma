@@ -35,6 +35,12 @@
 			"name": "Gamma OPH Mk1",
 			"description": "",
 			"tags": ["Polyphonic"]
+		},
+		{
+			"slug": "Wall-Mk1",
+			"name": "Gamma WALL Mk1",
+			"description": "",
+			"tags": ["Polyphonic"]
 		}
 	]
 }
