@@ -1,6 +1,12 @@
 #include "plugin.hpp"
 #include "components.hpp"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsuggest-override"
+#pragma GCC diagnostic ignored "-Wignored-qualifiers"
+#pragma GCC diagnostic ignored "-Wunused-function"
 #include "Gamma/Effects.h"
+#pragma GCC diagnostic pop
 
 namespace BitMk1 {
 

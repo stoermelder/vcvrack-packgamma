@@ -1,7 +1,14 @@
 #include "plugin.hpp"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsuggest-override"
+#pragma GCC diagnostic ignored "-Wignored-qualifiers"
+#pragma GCC diagnostic ignored "-Wunused-function"
 #include <Gamma/DFT.h>
 #include <Gamma/Oscillator.h>
 #include <Gamma/Filter.h>
+#pragma GCC diagnostic pop
+
 
 const int WINDOW_SIZE = 2048;
 

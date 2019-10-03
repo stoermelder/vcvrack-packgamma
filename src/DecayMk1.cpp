@@ -1,6 +1,11 @@
 #include "plugin.hpp"
 #include "components.hpp"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsuggest-override"
+#pragma GCC diagnostic ignored "-Wignored-qualifiers"
 #include "Gamma/Envelope.h"
+#pragma GCC diagnostic pop
 
 namespace Decay {
 
