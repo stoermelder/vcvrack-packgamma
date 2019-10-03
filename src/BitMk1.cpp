@@ -1,5 +1,5 @@
 #include "plugin.hpp"
-#include "widgets.hpp"
+#include "components.hpp"
 #include "Gamma/Effects.h"
 
 namespace BitMk1 {
@@ -75,15 +75,15 @@ struct BitMk1Widget : ModuleWidget {
 		setModule(module);
 		setPanel(APP->window->loadSvg(asset::plugin(pluginInstance, "res/BitMk1.svg")));
 
-		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, 0)));
-		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
+		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, 0)));
+		addChild(createWidget<MyBlackScrew>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
 		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 83.4f), module, BitMk1Module::FREQ_INPUT));
-		addParam(createParamCentered<Trimpot>(Vec(22.5f, 108.5f), module, BitMk1Module::FREQ_PARAM));
+		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 108.5f), module, BitMk1Module::FREQ_PARAM));
 		addParam(createParamCentered<CKSSH>(Vec(22.5f, 139.8f), module, BitMk1Module::FREQTAPER_PARAM));
 
 		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 180.0f), module, BitMk1Module::STEP_INPUT));
-		addParam(createParamCentered<Trimpot>(Vec(22.5f, 205.2f), module, BitMk1Module::STEP_PARAM));
+		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 205.2f), module, BitMk1Module::STEP_PARAM));
 		addParam(createParamCentered<CKSSH>(Vec(22.5f, 236.6f), module, BitMk1Module::STEPTAPER_PARAM));
 
 		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 280.6f), module, BitMk1Module::INPUT));
