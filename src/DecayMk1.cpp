@@ -38,20 +38,22 @@ struct DecayMk1Module : Module {
 		int c = inputs[GATE_INPUT].getChannels();
 		outputs[ENV_OUTPUT].setChannels(c);
 
-		for (int i = 0; i < c; i++) {
-			if (gateTrigger[i].process(inputs[GATE_INPUT].getVoltage(i))) {
-				float ampParam = params[AMP_PARAM].getValue();
-				float amp = inputs[AMP_INPUT].isConnected() ? inputs[AMP_INPUT].getVoltage() * ampParam / 10.f : ampParam;
+		if (c > 0) {
+			float ampParam = params[AMP_PARAM].getValue();
+			float amp = inputs[AMP_INPUT].isConnected() ? inputs[AMP_INPUT].getVoltage() * ampParam / 10.f : ampParam;
 
-				float decayParam = params[DECAY_PARAM].getValue();
-				float decay = inputs[DECAY_INPUT].isConnected() ? inputs[DECAY_INPUT].getVoltage() * decayParam / 10.f : decayParam;
+			float decayParam = params[DECAY_PARAM].getValue();
+			float decay = inputs[DECAY_INPUT].isConnected() ? inputs[DECAY_INPUT].getVoltage() * decayParam / 10.f : decayParam;
 
-				env[i].decay(decay);	// Set decay length in seconds
-				env[i].reset(amp);		// Reset envelope and specify amplitude
+			for (int i = 0; i < c; i++) {
+				if (gateTrigger[i].process(inputs[GATE_INPUT].getVoltage(i))) {
+					env[i].decay(decay);	// Set decay length in seconds
+					env[i].reset(amp);		// Reset envelope and specify amplitude
+				}
+
+				float s = env[i]();
+				outputs[ENV_OUTPUT].setVoltage(s, i);
 			}
-
-			float s = env[i]();
-			outputs[ENV_OUTPUT].setVoltage(s, i);
 		}
 	}
 };
