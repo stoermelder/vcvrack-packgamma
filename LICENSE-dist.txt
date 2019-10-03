@@ -1,6 +1,23 @@
 
 #### GAMMA ####
 
+Authors
+---------------------------------------------------------------------------
+
+Lead Developer:
+
+  Lance Putnam		ljputnam@umail.ucsb.edu
+
+Development Contributors:
+
+  Alex Norman
+  Graham Wakefield
+
+
+
+License
+---------------------------------------------------------------------------
+
 Copyright (C) 2006-2008. The Regents of the University of California (REGENTS). 
 All Rights Reserved.
 
