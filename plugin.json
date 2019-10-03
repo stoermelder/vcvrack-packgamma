@@ -29,6 +29,12 @@
 			"name": "Gamma BIT Mk1",
 			"description": "",
 			"tags": ["Polyphonic"]
+		},
+		{
+			"slug": "Oph-Mk1",
+			"name": "Gamma OPH Mk1",
+			"description": "",
+			"tags": ["Polyphonic"]
 		}
 	]
 }
