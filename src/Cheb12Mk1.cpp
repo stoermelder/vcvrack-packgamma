@@ -95,6 +95,7 @@ struct Cheb12Mk1Module : Module {
 			}
 
 			float s = osc[i]();
+
 			// Generate harmonics
 			s = cheby[i](s);
 
