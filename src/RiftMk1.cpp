@@ -7,10 +7,10 @@
 #include "Gamma/DFT.h"
 #pragma GCC diagnostic pop
 
-namespace WallMk1 {
+namespace RiftMk1 {
 
 // based on examples/spectral/brickwall.cpp
-struct WallMk1Module : Module {
+struct RiftMk1Module : Module {
 	enum ParamIds {
 		LO_PARAM,
         LO_OFFSET_PARAM,
@@ -36,7 +36,7 @@ struct WallMk1Module : Module {
 	float prev[PORT_MAX_CHANNELS];
 	float cvs[PORT_MAX_CHANNELS] = {};
 
-	WallMk1Module() :
+	RiftMk1Module() :
         stft(2048, 2048/4, 0, gam::HANN, gam::COMPLEX)
     {
 		config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS);
@@ -81,27 +81,27 @@ struct WallMk1Module : Module {
 	}
 };
 
-struct WallMk1Widget : ModuleWidget {
-	WallMk1Widget(WallMk1Module* module) {
+struct RiftMk1Widget : ModuleWidget {
+	RiftMk1Widget(RiftMk1Module* module) {
 		setModule(module);
-		setPanel(APP->window->loadSvg(asset::plugin(pluginInstance, "res/WallMk1.svg")));
+		setPanel(APP->window->loadSvg(asset::plugin(pluginInstance, "res/RiftMk1.svg")));
 
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, 0)));
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 81.6f), module, WallMk1Module::LO_OFFSET_PARAM));
-		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 106.5f), module, WallMk1Module::LO_INPUT));
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 131.5f), module, WallMk1Module::LO_PARAM));
+		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 81.6f), module, RiftMk1Module::LO_OFFSET_PARAM));
+		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 106.5f), module, RiftMk1Module::LO_INPUT));
+		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 131.5f), module, RiftMk1Module::LO_PARAM));
 
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 171.9f), module, WallMk1Module::HI_OFFSET_PARAM));
-		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 196.8f), module, WallMk1Module::HI_INPUT));
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 221.8f), module, WallMk1Module::HI_PARAM));
+		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 171.9f), module, RiftMk1Module::HI_OFFSET_PARAM));
+		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 196.8f), module, RiftMk1Module::HI_INPUT));
+		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 221.8f), module, RiftMk1Module::HI_PARAM));
 
-		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 280.6f), module, WallMk1Module::INPUT));
-		addOutput(createOutputCentered<PJ301MPort>(Vec(22.5f, 323.8f), module, WallMk1Module::OUTPUT));
+		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 280.6f), module, RiftMk1Module::INPUT));
+		addOutput(createOutputCentered<PJ301MPort>(Vec(22.5f, 323.8f), module, RiftMk1Module::OUTPUT));
 	}
 };
 
-} // namespace WallMk1
+} // namespace RiftMk1
 
-Model* modelWallMk1 = createModel<WallMk1::WallMk1Module, WallMk1::WallMk1Widget>("Wall-Mk1");
+Model* modelRiftMk1 = createModel<RiftMk1::RiftMk1Module, RiftMk1::RiftMk1Widget>("Rift-Mk1");

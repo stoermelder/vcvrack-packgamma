@@ -43,10 +43,10 @@
 			"tags": ["Polyphonic"]
 		},
 		{
-			"slug": "Wall-Mk1",
-			"name": "Gamma WALL Mk1",
-			"description": "",
-			"tags": [""]
+			"slug": "Rift-Mk1",
+			"name": "Gamma RIFT Mk1",
+			"description": "Brickwall bandpass filter",
+			"tags": ["Filter"]
 		}
 	]
 }

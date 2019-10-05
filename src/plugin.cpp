@@ -11,5 +11,5 @@ void init(rack::Plugin* p) {
 	p->addModel(modelBitMk1);
 	p->addModel(modelSineMk1);
 	p->addModel(modelCheb12Mk1);
-	p->addModel(modelWallMk1);
+	p->addModel(modelRiftMk1);
 }

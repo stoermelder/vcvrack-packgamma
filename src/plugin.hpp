@@ -11,4 +11,4 @@ extern Model* modelDecayMk1;
 extern Model* modelBitMk1;
 extern Model* modelSineMk1;
 extern Model* modelCheb12Mk1;
-extern Model* modelWallMk1;
+extern Model* modelRiftMk1;
