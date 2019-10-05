@@ -13,9 +13,9 @@ namespace RiftMk1 {
 struct RiftMk1Module : Module {
 	enum ParamIds {
 		LO_PARAM,
-        LO_OFFSET_PARAM,
+		LO_OFFSET_PARAM,
 		HI_PARAM,
-        HI_OFFSET_PARAM,
+		HI_OFFSET_PARAM,
 		NUM_PARAMS
 	};
 	enum InputIds {
@@ -37,13 +37,13 @@ struct RiftMk1Module : Module {
 	float cvs[PORT_MAX_CHANNELS] = {};
 
 	RiftMk1Module() :
-        stft(2048, 2048/4, 0, gam::HANN, gam::COMPLEX)
-    {
+		stft(2048, 2048/4, 0, gam::HANN, gam::COMPLEX)
+	{
 		config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS);
 		configParam(LO_PARAM, 0.f, 2.f, 1.f, "Low CV Attenuation");
-        configParam(LO_OFFSET_PARAM, -42.f, 78.f, 0.f, "Low Frequency", " Hz", dsp::FREQ_SEMITONE, dsp::FREQ_C4);
+		configParam(LO_OFFSET_PARAM, -42.f, 78.f, 0.f, "Low Frequency", " Hz", dsp::FREQ_SEMITONE, dsp::FREQ_C4);
 		configParam(HI_PARAM, 0.f, 2.f, 1.f, "High CV Attenuation");
-        configParam(HI_OFFSET_PARAM, -42.f, 78.f, 0.f, "High Frequency", " Hz", dsp::FREQ_SEMITONE, dsp::FREQ_C4);
+		configParam(HI_OFFSET_PARAM, -42.f, 78.f, 0.f, "High Frequency", " Hz", dsp::FREQ_SEMITONE, dsp::FREQ_C4);
 		onReset();
 	}
 
@@ -52,32 +52,32 @@ struct RiftMk1Module : Module {
 		int c = std::max(inputs[INPUT].getChannels(), 1);
 		outputs[OUTPUT].setChannels(c);
 
-        float s = inputs[INPUT].getVoltage();
+		float s = inputs[INPUT].getVoltage();
 
-        if (stft(s)) {
-            // Define the band edges, in Hz
-            float freqLoParam = params[LO_OFFSET_PARAM].getValue() / 12.f;
-            freqLoParam += inputs[LO_INPUT].isConnected() ? inputs[LO_INPUT].getVoltage() * params[LO_PARAM].getValue() / 5.f : 0.f;
-            float freqLo = dsp::FREQ_C4 * powf(2.0, freqLoParam);
+		if (stft(s)) {
+			// Define the band edges, in Hz
+			float freqLoParam = params[LO_OFFSET_PARAM].getValue() / 12.f;
+			freqLoParam += inputs[LO_INPUT].isConnected() ? inputs[LO_INPUT].getVoltage() * params[LO_PARAM].getValue() / 5.f : 0.f;
+			float freqLo = dsp::FREQ_C4 * powf(2.0, freqLoParam);
 
-            float freqHiParam = params[HI_OFFSET_PARAM].getValue() / 12.f;
-            freqHiParam += inputs[HI_INPUT].isConnected() ? inputs[HI_INPUT].getVoltage() * params[HI_PARAM].getValue() / 5.f : 0.f;
-            float freqHi = dsp::FREQ_C4 * powf(2.0, freqHiParam);
+			float freqHiParam = params[HI_OFFSET_PARAM].getValue() / 12.f;
+			freqHiParam += inputs[HI_INPUT].isConnected() ? inputs[HI_INPUT].getVoltage() * params[HI_PARAM].getValue() / 5.f : 0.f;
+			float freqHi = dsp::FREQ_C4 * powf(2.0, freqHiParam);
 
-            for(unsigned k = 0; k < stft.numBins(); ++k){
-                // Compute the frequency, in Hz, of this bin
-                float freq = k*stft.binFreq();
+			for(unsigned k = 0; k < stft.numBins(); ++k){
+				// Compute the frequency, in Hz, of this bin
+				float freq = k*stft.binFreq();
 
-                // If the bin frequency is outside of our band, then zero
-                // the bin.
-                if (freq < freqLo || freq > freqHi){
-                    stft.bin(k) = 0;
-                }
-            }
-        }
+				// If the bin frequency is outside of our band, then zero
+				// the bin.
+				if (freq < freqLo || freq > freqHi){
+					stft.bin(k) = 0;
+				}
+			}
+		}
 
-        s = stft();
-        outputs[OUTPUT].setVoltage(s);
+		s = stft();
+		outputs[OUTPUT].setVoltage(s);
 	}
 };
 
