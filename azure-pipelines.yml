@@ -50,9 +50,7 @@ jobs:
   - bash: |
       export RACK_DIR=$AGENT_TEMPDIRECTORY/Rack-SDK
       export CC=gcc
-
       make win-dist
-
       mkdir products_win/
       cp dist/*zip products_win/
     displayName: Build Windows Plugins
