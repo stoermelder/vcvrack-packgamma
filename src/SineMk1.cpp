@@ -16,6 +16,7 @@ struct SineMk1Module : Module {
 		FBKTAPER_PARAM,
 		FREQ_PARAM,
 		FINE_PARAM,
+		OCT_PARAM,
 		NUM_PARAMS
 	};
 	enum InputIds {
@@ -40,6 +41,7 @@ struct SineMk1Module : Module {
 		configParam(FBK_PARAM, 0.f, 1.f, 1.f, "Feedback amount");
 		configParam(FREQ_PARAM, -54.f, 54.f, 0.f, "Frequency", " Hz", dsp::FREQ_SEMITONE, dsp::FREQ_C4);
 		configParam(FINE_PARAM, -1.f, 1.f, 0.f, "Fine frequency");
+		configParam(OCT_PARAM, -3.f, 3.f, 0.f, "Octave");
 		onReset();
 	}
 
@@ -49,6 +51,7 @@ struct SineMk1Module : Module {
 		outputs[OUTPUT].setChannels(c);
 
 		float freqParam = params[FREQ_PARAM].getValue() / 12.f;
+		freqParam += params[OCT_PARAM].getValue();
 		freqParam += dsp::quadraticBipolar(params[FINE_PARAM].getValue()) * 3.f / 12.f;
 
 		float fbkParam = params[FBK_PARAM].getValue();
@@ -93,8 +96,11 @@ struct SineMk1Widget : ModuleWidget {
 		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 108.5f), module, SineMk1Module::FBK_PARAM));
 		addParam(createParamCentered<CKSSH>(Vec(22.5f, 139.8f), module, SineMk1Module::FBKTAPER_PARAM));
 
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 208.1f), module, SineMk1Module::FREQ_PARAM));
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 238.2f), module, SineMk1Module::FINE_PARAM));
+		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 181.2f), module, SineMk1Module::FREQ_PARAM));
+		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 210.7f), module, SineMk1Module::FINE_PARAM));
+		MyTrimpot* tp1 = createParamCentered<MyTrimpot>(Vec(22.5f, 240.1f), module, SineMk1Module::OCT_PARAM);
+		tp1->snap = true;
+		addParam(tp1);
 
 		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 280.6f), module, SineMk1Module::VOCT_INPUT));
 		addOutput(createOutputCentered<PJ301MPort>(Vec(22.5f, 323.8f), module, SineMk1Module::OUTPUT));
