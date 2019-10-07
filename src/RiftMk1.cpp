@@ -45,39 +45,39 @@ struct RiftMk1Module : Module {
 		configParam(HI_PARAM, 0.f, 2.f, 1.f, "High CV Attenuation");
 		configParam(HI_OFFSET_PARAM, -42.f, 78.f, 0.f, "High Frequency", " Hz", dsp::FREQ_SEMITONE, dsp::FREQ_C4);
 		onReset();
+		stft.precise(true);
 	}
 
 	void process(const ProcessArgs &args) override {
 		gam::Domain::master().spu(args.sampleRate);
-		int c = std::max(inputs[INPUT].getChannels(), 1);
-		outputs[OUTPUT].setChannels(c);
 
-		float s = inputs[INPUT].getVoltage();
+		if (inputs[INPUT].isConnected()) {
+			float s = inputs[INPUT].getVoltage();
 
-		if (stft(s)) {
-			// Define the band edges, in Hz
-			float freqLoParam = params[LO_OFFSET_PARAM].getValue() / 12.f;
-			freqLoParam += inputs[LO_INPUT].isConnected() ? inputs[LO_INPUT].getVoltage() * params[LO_PARAM].getValue() / 5.f : 0.f;
-			float freqLo = dsp::FREQ_C4 * powf(2.0, freqLoParam);
+			if (stft(s)) {
+				// Define the band edges, in Hz
+				float freqLoParam = params[LO_OFFSET_PARAM].getValue() / 12.f;
+				freqLoParam += inputs[LO_INPUT].isConnected() ? inputs[LO_INPUT].getVoltage() * params[LO_PARAM].getValue() / 5.f : 0.f;
+				float freqLo = dsp::FREQ_C4 * powf(2.0, freqLoParam);
 
-			float freqHiParam = params[HI_OFFSET_PARAM].getValue() / 12.f;
-			freqHiParam += inputs[HI_INPUT].isConnected() ? inputs[HI_INPUT].getVoltage() * params[HI_PARAM].getValue() / 5.f : 0.f;
-			float freqHi = dsp::FREQ_C4 * powf(2.0, freqHiParam);
+				float freqHiParam = params[HI_OFFSET_PARAM].getValue() / 12.f;
+				freqHiParam += inputs[HI_INPUT].isConnected() ? inputs[HI_INPUT].getVoltage() * params[HI_PARAM].getValue() / 5.f : 0.f;
+				float freqHi = dsp::FREQ_C4 * powf(2.0, freqHiParam);
 
-			for(unsigned k = 0; k < stft.numBins(); ++k){
-				// Compute the frequency, in Hz, of this bin
-				float freq = k*stft.binFreq();
+				for(unsigned k = 0; k < stft.numBins(); ++k){
+					// Compute the frequency, in Hz, of this bin
+					float freq = k*stft.binFreq();
 
-				// If the bin frequency is outside of our band, then zero
-				// the bin.
-				if (freq < freqLo || freq > freqHi){
-					stft.bin(k) = 0;
+					// If the bin frequency is outside of our band, then zero the bin.
+					if (freq < freqLo || freq > freqHi){
+						stft.bin(k) = 0;
+					}
 				}
 			}
-		}
 
-		s = stft();
-		outputs[OUTPUT].setVoltage(s);
+			s = stft();
+			outputs[OUTPUT].setVoltage(s);
+		}
 	}
 };
 
