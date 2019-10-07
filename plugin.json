@@ -47,6 +47,12 @@
 			"name": "Gamma RIFT Mk1",
 			"description": "Brickwall bandpass filter",
 			"tags": ["Filter"]
+		},
+		{
+			"slug": "Epoxy-Mk1",
+			"name": "Gamma EPOXY Mk1",
+			"description": "",
+			"tags": ["Filter"]
 		}
 	]
 }
