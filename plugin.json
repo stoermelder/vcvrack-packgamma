@@ -4,7 +4,7 @@
 	"license": "GPL-3.0-only",
 	"author": "Benjamin Dill",
 	"name": "PackGamma",
-	"brand": "stoermelder",	
+	"brand": "stoermelder",
 	"authorEmail": "stoermelder@outlook.com",
 	"pluginUrl": "https://github.com/stoermelder/vcvrack-packgamma",
 	"authorUrl": "https://github.com/stoermelder",
@@ -13,7 +13,7 @@
 	"modules": [
 		{
 			"slug": "FreezeMk1",
-			"name": "Freeze Mk1",
+			"name": "Gamma Freeze Mk1",
 			"description": "",
 			"tags": [],
 			"disabled": true
@@ -21,38 +21,38 @@
 		{
 			"slug": "Decay-Mk1",
 			"name": "Gamma DEC Mk1",
-			"description": "",
+			"description": "Simple decaying envelope",
 			"tags": ["Envelope generator", "Polyphonic"]
 		},
 		{
 			"slug": "Bit-Mk1",
 			"name": "Gamma BIT Mk1",
-			"description": "",
-			"tags": ["Polyphonic"]
+			"description": "Bitcrusher effect",
+			"tags": ["Polyphonic", "Distortion", "Effect"]
 		},
 		{
 			"slug": "Sine-Mk1",
 			"name": "Gamma SINE Mk1",
-			"description": "Sine osciallator with feedback phase modulation",
-			"tags": ["Polyphonic"]
+			"description": "Sine oscillator with feedback phase modulation",
+			"tags": ["Polyphonic", "Oscillator"]
 		},
 		{
 			"slug": "Cheb12-Mk1",
 			"name": "Gamma CHEB12 Mk1",
-			"description": "",
-			"tags": ["Polyphonic"]
+			"description": "8-voice oscillator using q chebychev waveshaper with 12 harmonics",
+			"tags": ["Polyphonic", "Oscillator", "Waveshaper"]
 		},
 		{
 			"slug": "Rift-Mk1",
 			"name": "Gamma RIFT Mk1",
-			"description": "Brickwall bandpass filter",
-			"tags": ["Filter"]
+			"description": "Brickwall bandpass filter using spectral transform",
+			"tags": ["Filter", "Digital"]
 		},
 		{
 			"slug": "Epoxy-Mk1",
 			"name": "Gamma EPOXY Mk1",
-			"description": "",
-			"tags": ["Filter"]
+			"description": "Brickwall bandpass splitter and merger using spectral transform",
+			"tags": ["Filter", "Utility", "Digital"]
 		}
 	]
 }
