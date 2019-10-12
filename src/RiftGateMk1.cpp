@@ -7,10 +7,10 @@
 #include "Gamma/DFT.h"
 #pragma GCC diagnostic pop
 
-namespace EpoxyMk1 {
+namespace RiftGate {
 
 // based on examples/spectral/brickwall.cpp
-struct EpoxyMk1Module : Module {
+struct RiftGateModule : Module {
 	enum ParamIds {
 		LO_PARAM,
 		LO_OFFSET_PARAM,
@@ -41,7 +41,7 @@ struct EpoxyMk1Module : Module {
 	float prev[PORT_MAX_CHANNELS];
 	float cvs[PORT_MAX_CHANNELS] = {};
 
-	EpoxyMk1Module() :
+	RiftGateModule() :
 		in1_stft(2048, 2048/4, 0, gam::HANN, gam::COMPLEX),
 		in2_stft(2048, 2048/4, 0, gam::HANN, gam::COMPLEX),
 		out1_stft(2048, 2048/4, 0, gam::HANN, gam::COMPLEX),
@@ -103,32 +103,32 @@ struct EpoxyMk1Module : Module {
 	}
 };
 
-struct EpoxyMk1Widget : ModuleWidget {
-	EpoxyMk1Widget(EpoxyMk1Module* module) {
+struct RiftGateMk1Widget : ModuleWidget {
+	RiftGateMk1Widget(RiftGateModule* module) {
 		setModule(module);
-		setPanel(APP->window->loadSvg(asset::plugin(pluginInstance, "res/EpoxyMk1.svg")));
+		setPanel(APP->window->loadSvg(asset::plugin(pluginInstance, "res/RiftGateMk1.svg")));
 
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, 0)));
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 81.6f), module, EpoxyMk1Module::LO_OFFSET_PARAM));
-		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 106.5f), module, EpoxyMk1Module::LO_INPUT));
-		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 131.5f), module, EpoxyMk1Module::LO_PARAM));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 81.6f), module, RiftGateModule::LO_OFFSET_PARAM));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 106.5f), module, RiftGateModule::LO_INPUT));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 131.5f), module, RiftGateModule::LO_PARAM));
 
-		addParam(createParamCentered<StoermelderTrimpot>(Vec(52.5f, 81.6f), module, EpoxyMk1Module::HI_OFFSET_PARAM));
-		addInput(createInputCentered<StoermelderPort>(Vec(52.5f, 106.5f), module, EpoxyMk1Module::HI_INPUT));
-		addParam(createParamCentered<StoermelderTrimpot>(Vec(52.5f, 131.5f), module, EpoxyMk1Module::HI_PARAM));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(52.5f, 81.6f), module, RiftGateModule::HI_OFFSET_PARAM));
+		addInput(createInputCentered<StoermelderPort>(Vec(52.5f, 106.5f), module, RiftGateModule::HI_INPUT));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(52.5f, 131.5f), module, RiftGateModule::HI_PARAM));
 
-		addInput(createInputCentered<StoermelderPort>(Vec(37.5f, 183.4f), module, EpoxyMk1Module::IN_INPUT));
-		addOutput(createOutputCentered<StoermelderPort>(Vec(22.5f, 226.9f), module, EpoxyMk1Module::OUTER_OUTPUT));
-		addOutput(createOutputCentered<StoermelderPort>(Vec(52.5f, 226.9f), module, EpoxyMk1Module::INNER_OUTPUT));
+		addInput(createInputCentered<StoermelderPort>(Vec(37.5f, 183.4f), module, RiftGateModule::IN_INPUT));
+		addOutput(createOutputCentered<StoermelderPort>(Vec(22.5f, 226.9f), module, RiftGateModule::OUTER_OUTPUT));
+		addOutput(createOutputCentered<StoermelderPort>(Vec(52.5f, 226.9f), module, RiftGateModule::INNER_OUTPUT));
 
-		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 280.6f), module, EpoxyMk1Module::OUTER_INPUT));
-		addInput(createInputCentered<StoermelderPort>(Vec(52.5f, 280.6f), module, EpoxyMk1Module::INNER_INPUT));
-		addOutput(createOutputCentered<StoermelderPort>(Vec(37.5f, 323.8f), module, EpoxyMk1Module::OUT_OUTPUT));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 280.6f), module, RiftGateModule::OUTER_INPUT));
+		addInput(createInputCentered<StoermelderPort>(Vec(52.5f, 280.6f), module, RiftGateModule::INNER_INPUT));
+		addOutput(createOutputCentered<StoermelderPort>(Vec(37.5f, 323.8f), module, RiftGateModule::OUT_OUTPUT));
 	}
 };
 
-} // namespace EpoxyMk1
+} // namespace RiftGateMk1
 
-Model* modelEpoxyMk1 = createModel<EpoxyMk1::EpoxyMk1Module, EpoxyMk1::EpoxyMk1Widget>("Epoxy-Mk1");
+Model* modelRiftGateMk1 = createModel<RiftGate::RiftGateModule, RiftGate::RiftGateMk1Widget>("RiftGate-Mk1");

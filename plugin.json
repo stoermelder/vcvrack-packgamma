@@ -49,8 +49,8 @@
 			"tags": ["Filter", "Digital"]
 		},
 		{
-			"slug": "Epoxy-Mk1",
-			"name": "Gamma EPOXY Mk1",
+			"slug": "RiftGate-Mk1",
+			"name": "Gamma RIFT/GATE Mk1",
 			"description": "Brickwall bandpass splitter and merger using spectral transform",
 			"tags": ["Filter", "Utility", "Digital"]
 		}
