@@ -119,13 +119,13 @@ struct RiftGateMk1Widget : ModuleWidget {
 		addInput(createInputCentered<StoermelderPort>(Vec(52.5f, 106.5f), module, RiftGateModule::HI_INPUT));
 		addParam(createParamCentered<StoermelderTrimpot>(Vec(52.5f, 131.5f), module, RiftGateModule::HI_PARAM));
 
-		addInput(createInputCentered<StoermelderPort>(Vec(37.5f, 183.4f), module, RiftGateModule::IN_INPUT));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 183.4f), module, RiftGateModule::IN_INPUT));
 		addOutput(createOutputCentered<StoermelderPort>(Vec(22.5f, 226.9f), module, RiftGateModule::OUTER_OUTPUT));
 		addOutput(createOutputCentered<StoermelderPort>(Vec(52.5f, 226.9f), module, RiftGateModule::INNER_OUTPUT));
 
 		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 280.6f), module, RiftGateModule::OUTER_INPUT));
 		addInput(createInputCentered<StoermelderPort>(Vec(52.5f, 280.6f), module, RiftGateModule::INNER_INPUT));
-		addOutput(createOutputCentered<StoermelderPort>(Vec(37.5f, 323.8f), module, RiftGateModule::OUT_OUTPUT));
+		addOutput(createOutputCentered<StoermelderPort>(Vec(52.5f, 323.8f), module, RiftGateModule::OUT_OUTPUT));
 	}
 };
 
