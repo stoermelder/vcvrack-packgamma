@@ -92,18 +92,18 @@ struct SineMk1Widget : ModuleWidget {
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, 0)));
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 83.4f), module, SineMk1Module::FBK_INPUT));
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 108.5f), module, SineMk1Module::FBK_PARAM));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 83.4f), module, SineMk1Module::FBK_INPUT));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 108.5f), module, SineMk1Module::FBK_PARAM));
 		addParam(createParamCentered<CKSSH>(Vec(22.5f, 139.8f), module, SineMk1Module::FBKTAPER_PARAM));
 
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 181.2f), module, SineMk1Module::FREQ_PARAM));
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 210.7f), module, SineMk1Module::FINE_PARAM));
-		MyTrimpot* tp1 = createParamCentered<MyTrimpot>(Vec(22.5f, 240.1f), module, SineMk1Module::OCT_PARAM);
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 181.2f), module, SineMk1Module::FREQ_PARAM));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 210.7f), module, SineMk1Module::FINE_PARAM));
+		StoermelderTrimpot* tp1 = createParamCentered<StoermelderTrimpot>(Vec(22.5f, 240.1f), module, SineMk1Module::OCT_PARAM);
 		tp1->snap = true;
 		addParam(tp1);
 
-		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 280.6f), module, SineMk1Module::VOCT_INPUT));
-		addOutput(createOutputCentered<PJ301MPort>(Vec(22.5f, 323.8f), module, SineMk1Module::OUTPUT));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 280.6f), module, SineMk1Module::VOCT_INPUT));
+		addOutput(createOutputCentered<StoermelderPort>(Vec(22.5f, 323.8f), module, SineMk1Module::OUTPUT));
 	}
 };
 

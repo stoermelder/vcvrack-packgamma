@@ -89,16 +89,16 @@ struct RiftMk1Widget : ModuleWidget {
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, 0)));
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 81.6f), module, RiftMk1Module::LO_OFFSET_PARAM));
-		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 106.5f), module, RiftMk1Module::LO_INPUT));
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 131.5f), module, RiftMk1Module::LO_PARAM));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 81.6f), module, RiftMk1Module::LO_OFFSET_PARAM));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 106.5f), module, RiftMk1Module::LO_INPUT));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 131.5f), module, RiftMk1Module::LO_PARAM));
 
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 171.9f), module, RiftMk1Module::HI_OFFSET_PARAM));
-		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 196.8f), module, RiftMk1Module::HI_INPUT));
-		addParam(createParamCentered<MyTrimpot>(Vec(22.5f, 221.8f), module, RiftMk1Module::HI_PARAM));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 171.9f), module, RiftMk1Module::HI_OFFSET_PARAM));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 196.8f), module, RiftMk1Module::HI_INPUT));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 221.8f), module, RiftMk1Module::HI_PARAM));
 
-		addInput(createInputCentered<PJ301MPort>(Vec(22.5f, 280.6f), module, RiftMk1Module::INPUT));
-		addOutput(createOutputCentered<PJ301MPort>(Vec(22.5f, 323.8f), module, RiftMk1Module::OUTPUT));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 280.6f), module, RiftMk1Module::INPUT));
+		addOutput(createOutputCentered<StoermelderPort>(Vec(22.5f, 323.8f), module, RiftMk1Module::OUTPUT));
 	}
 };
 

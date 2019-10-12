@@ -138,48 +138,48 @@ struct Cheb12Mk1Widget : ModuleWidget {
 			}
 		}
 
-		addInput(createInputCentered<PJ301MPort>(Vec(90.0f, 75.5f),   module, Cheb12Mk1Module::HARM_INPUT + 0));
-		addInput(createInputCentered<PJ301MPort>(Vec(123.8f, 84.5f),  module, Cheb12Mk1Module::HARM_INPUT + 1));
-		addInput(createInputCentered<PJ301MPort>(Vec(148.6f, 109.3f), module, Cheb12Mk1Module::HARM_INPUT + 2));
-		addInput(createInputCentered<PJ301MPort>(Vec(157.7f, 143.1f), module, Cheb12Mk1Module::HARM_INPUT + 3));
-		addInput(createInputCentered<PJ301MPort>(Vec(148.6f, 177.0f), module, Cheb12Mk1Module::HARM_INPUT + 4));
-		addInput(createInputCentered<PJ301MPort>(Vec(123.8f, 201.7f), module, Cheb12Mk1Module::HARM_INPUT + 5));
-		addInput(createInputCentered<PJ301MPort>(Vec(90.0f, 210.8f),  module, Cheb12Mk1Module::HARM_INPUT + 6));
-		addInput(createInputCentered<PJ301MPort>(Vec(56.2f, 201.7f),  module, Cheb12Mk1Module::HARM_INPUT + 7));
-		addInput(createInputCentered<PJ301MPort>(Vec(31.4f, 177.0f),  module, Cheb12Mk1Module::HARM_INPUT + 8));
-		addInput(createInputCentered<PJ301MPort>(Vec(22.3f, 143.1f),  module, Cheb12Mk1Module::HARM_INPUT + 9));
-		addInput(createInputCentered<PJ301MPort>(Vec(31.4f, 109.3f),  module, Cheb12Mk1Module::HARM_INPUT + 10));
-		addInput(createInputCentered<PJ301MPort>(Vec(56.2f, 84.5f),   module, Cheb12Mk1Module::HARM_INPUT + 11));
+		addInput(createInputCentered<StoermelderPort>(Vec(90.0f, 75.5f),   module, Cheb12Mk1Module::HARM_INPUT + 0));
+		addInput(createInputCentered<StoermelderPort>(Vec(123.8f, 84.5f),  module, Cheb12Mk1Module::HARM_INPUT + 1));
+		addInput(createInputCentered<StoermelderPort>(Vec(148.6f, 109.3f), module, Cheb12Mk1Module::HARM_INPUT + 2));
+		addInput(createInputCentered<StoermelderPort>(Vec(157.7f, 143.1f), module, Cheb12Mk1Module::HARM_INPUT + 3));
+		addInput(createInputCentered<StoermelderPort>(Vec(148.6f, 177.0f), module, Cheb12Mk1Module::HARM_INPUT + 4));
+		addInput(createInputCentered<StoermelderPort>(Vec(123.8f, 201.7f), module, Cheb12Mk1Module::HARM_INPUT + 5));
+		addInput(createInputCentered<StoermelderPort>(Vec(90.0f, 210.8f),  module, Cheb12Mk1Module::HARM_INPUT + 6));
+		addInput(createInputCentered<StoermelderPort>(Vec(56.2f, 201.7f),  module, Cheb12Mk1Module::HARM_INPUT + 7));
+		addInput(createInputCentered<StoermelderPort>(Vec(31.4f, 177.0f),  module, Cheb12Mk1Module::HARM_INPUT + 8));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.3f, 143.1f),  module, Cheb12Mk1Module::HARM_INPUT + 9));
+		addInput(createInputCentered<StoermelderPort>(Vec(31.4f, 109.3f),  module, Cheb12Mk1Module::HARM_INPUT + 10));
+		addInput(createInputCentered<StoermelderPort>(Vec(56.2f, 84.5f),   module, Cheb12Mk1Module::HARM_INPUT + 11));
 
-		addParam(createParamCentered<MyTrimpot>(Vec(90.0f, 100.2f),  module, Cheb12Mk1Module::HARM_PARAM + 0));
-		addParam(createParamCentered<MyTrimpot>(Vec(111.5f, 105.9f), module, Cheb12Mk1Module::HARM_PARAM + 1));
-		addParam(createParamCentered<MyTrimpot>(Vec(127.2f, 121.7f), module, Cheb12Mk1Module::HARM_PARAM + 2));
-		addParam(createParamCentered<MyTrimpot>(Vec(133.0f, 143.1f), module, Cheb12Mk1Module::HARM_PARAM + 3));
-		addParam(createParamCentered<MyTrimpot>(Vec(127.2f, 164.6f), module, Cheb12Mk1Module::HARM_PARAM + 4));
-		addParam(createParamCentered<MyTrimpot>(Vec(111.5f, 180.3f), module, Cheb12Mk1Module::HARM_PARAM + 5));
-		addParam(createParamCentered<MyTrimpot>(Vec(90.0f, 186.1f),  module, Cheb12Mk1Module::HARM_PARAM + 6));
-		addParam(createParamCentered<MyTrimpot>(Vec(68.5f, 180.3f),  module, Cheb12Mk1Module::HARM_PARAM + 7));
-		addParam(createParamCentered<MyTrimpot>(Vec(52.8f, 164.6f),  module, Cheb12Mk1Module::HARM_PARAM + 8));
-		addParam(createParamCentered<MyTrimpot>(Vec(47.0f, 143.1f),  module, Cheb12Mk1Module::HARM_PARAM + 9));
-		addParam(createParamCentered<MyTrimpot>(Vec(52.8f, 121.7f),  module, Cheb12Mk1Module::HARM_PARAM + 10));
-		addParam(createParamCentered<MyTrimpot>(Vec(68.5f, 105.9f),  module, Cheb12Mk1Module::HARM_PARAM + 11));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(90.0f, 100.2f),  module, Cheb12Mk1Module::HARM_PARAM + 0));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(111.5f, 105.9f), module, Cheb12Mk1Module::HARM_PARAM + 1));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(127.2f, 121.7f), module, Cheb12Mk1Module::HARM_PARAM + 2));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(133.0f, 143.1f), module, Cheb12Mk1Module::HARM_PARAM + 3));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(127.2f, 164.6f), module, Cheb12Mk1Module::HARM_PARAM + 4));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(111.5f, 180.3f), module, Cheb12Mk1Module::HARM_PARAM + 5));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(90.0f, 186.1f),  module, Cheb12Mk1Module::HARM_PARAM + 6));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(68.5f, 180.3f),  module, Cheb12Mk1Module::HARM_PARAM + 7));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(52.8f, 164.6f),  module, Cheb12Mk1Module::HARM_PARAM + 8));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(47.0f, 143.1f),  module, Cheb12Mk1Module::HARM_PARAM + 9));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(52.8f, 121.7f),  module, Cheb12Mk1Module::HARM_PARAM + 10));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(68.5f, 105.9f),  module, Cheb12Mk1Module::HARM_PARAM + 11));
 
-		addInput(createInputCentered<PJ301MPort>(Vec(20.8f, 257.7f), module, Cheb12Mk1Module::ROT_INPUT));
-		MyTrimpot* tp1 = createParamCentered<MyTrimpot>(Vec(20.8f, 280.7f), module, Cheb12Mk1Module::ROT_PARAM);
+		addInput(createInputCentered<StoermelderPort>(Vec(20.8f, 257.7f), module, Cheb12Mk1Module::ROT_INPUT));
+		StoermelderTrimpot* tp1 = createParamCentered<StoermelderTrimpot>(Vec(20.8f, 280.7f), module, Cheb12Mk1Module::ROT_PARAM);
 		tp1->snap = true;
 		addParam(tp1);
 
-		addInput(createInputCentered<PJ301MPort>(Vec(158.5f, 257.7f), module, Cheb12Mk1Module::DETUNE_INPUT));
-		addParam(createParamCentered<MyTrimpot>(Vec(158.5f, 280.7f), module, Cheb12Mk1Module::DETUNE_PARAM));
+		addInput(createInputCentered<StoermelderPort>(Vec(158.5f, 257.7f), module, Cheb12Mk1Module::DETUNE_INPUT));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(158.5f, 280.7f), module, Cheb12Mk1Module::DETUNE_PARAM));
 
-		addParam(createParamCentered<MyTrimpot>(Vec(63.2f, 323.8f), module, Cheb12Mk1Module::FREQ_PARAM));
-		addParam(createParamCentered<MyTrimpot>(Vec(90.0f, 323.8f), module, Cheb12Mk1Module::FINE_PARAM));
-		MyTrimpot* tp2 = createParamCentered<MyTrimpot>(Vec(116.8f, 323.8f), module, Cheb12Mk1Module::OCT_PARAM);
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(63.2f, 323.8f), module, Cheb12Mk1Module::FREQ_PARAM));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(90.0f, 323.8f), module, Cheb12Mk1Module::FINE_PARAM));
+		StoermelderTrimpot* tp2 = createParamCentered<StoermelderTrimpot>(Vec(116.8f, 323.8f), module, Cheb12Mk1Module::OCT_PARAM);
 		tp2->snap = true;
 		addParam(tp2);
 
-		addInput(createInputCentered<PJ301MPort>(Vec(20.8f, 323.8f), module, Cheb12Mk1Module::VOCT_INPUT));
-		addOutput(createOutputCentered<PJ301MPort>(Vec(158.5f, 323.8f), module, Cheb12Mk1Module::OUTPUT));
+		addInput(createInputCentered<StoermelderPort>(Vec(20.8f, 323.8f), module, Cheb12Mk1Module::VOCT_INPUT));
+		addOutput(createOutputCentered<StoermelderPort>(Vec(158.5f, 323.8f), module, Cheb12Mk1Module::OUTPUT));
 	}
 };
 
