@@ -29,6 +29,7 @@ struct SineMk1Module : Module {
 		NUM_OUTPUTS
 	};
 	enum LightIds {
+		ENUMS(PHASE_LIGHT, 3),
 		NUM_LIGHTS
 	};
 
@@ -36,19 +37,23 @@ struct SineMk1Module : Module {
 	float prev[PORT_MAX_CHANNELS];
 	float cvs[PORT_MAX_CHANNELS] = {};
 
+	dsp::ClockDivider lightDivider;
+
 	SineMk1Module() {
 		config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS);
-		configParam(FBK_PARAM, 0.f, 1.f, 1.f, "Feedback amount");
+		configParam(FBK_PARAM, 0.f, 1.f, 0.f, "Feedback amount");
+		configParam(FBKTAPER_PARAM, 0.f, 1.f, 1.f, "Feedback taper");
 		configParam(FREQ_PARAM, -54.f, 54.f, 0.f, "Frequency", " Hz", dsp::FREQ_SEMITONE, dsp::FREQ_C4);
 		configParam(FINE_PARAM, -1.f, 1.f, 0.f, "Fine frequency");
 		configParam(OCT_PARAM, -3.f, 3.f, 0.f, "Octave");
 		onReset();
+		lightDivider.setDivision(32);
 	}
 
 	void process(const ProcessArgs &args) override {
 		gam::Domain::master().spu(args.sampleRate);
-		int c = std::max(inputs[VOCT_INPUT].getChannels(), 1);
-		outputs[OUTPUT].setChannels(c);
+		int channels = std::max(inputs[VOCT_INPUT].getChannels(), 1);
+		outputs[OUTPUT].setChannels(channels);
 
 		float freqParam = params[FREQ_PARAM].getValue() / 12.f;
 		freqParam += params[OCT_PARAM].getValue();
@@ -56,11 +61,11 @@ struct SineMk1Module : Module {
 
 		float fbkParam = params[FBK_PARAM].getValue();
 
-		for (int i = 0; i < c; i++) {
-			int c_fbk = inputs[FBK_INPUT].getChannels() == c ? i : 0;
+		for (int i = 0; i < channels; i++) {
+			int c_fbk = inputs[FBK_INPUT].getChannels() == channels ? i : 0;
 			float fbk = inputs[FBK_INPUT].isConnected() ? inputs[FBK_INPUT].getVoltage(c_fbk) * fbkParam / 10.f : fbkParam;
 			if (params[FBKTAPER_PARAM].getValue() == 1.f)
-				fbk = powf(fbk, 0.5f);
+				fbk = 1 - powf(1 - fbk, 0.5f);
 
 			float pitch = freqParam + inputs[VOCT_INPUT].getVoltage(i);
 			if (pitch != cvs[i]) {
@@ -81,6 +86,21 @@ struct SineMk1Module : Module {
 			float o = rescale(prev[i], -1.f, 1.f, -5.f, 5.f);
 			outputs[OUTPUT].setVoltage(o, i);
 		}
+
+		// Light
+		if (lightDivider.process()) {
+			if (channels == 1) {
+				float lightValue = simd::sin(2 * M_PI * (osc[0].phase() * 2.f - 1.f));
+				lights[PHASE_LIGHT + 0].setSmoothBrightness(-lightValue, args.sampleTime * lightDivider.getDivision());
+				lights[PHASE_LIGHT + 1].setSmoothBrightness(lightValue, args.sampleTime * lightDivider.getDivision());
+				lights[PHASE_LIGHT + 2].setBrightness(0.f);
+			}
+			else {
+				lights[PHASE_LIGHT + 0].setBrightness(0.f);
+				lights[PHASE_LIGHT + 1].setBrightness(0.f);
+				lights[PHASE_LIGHT + 2].setBrightness(1.f);
+			}
+		}
 	}
 };
 
@@ -96,14 +116,16 @@ struct SineMk1Widget : ModuleWidget {
 		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 108.5f), module, SineMk1Module::FBK_PARAM));
 		addParam(createParamCentered<CKSSH>(Vec(22.5f, 139.8f), module, SineMk1Module::FBKTAPER_PARAM));
 
-		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 181.2f), module, SineMk1Module::FREQ_PARAM));
-		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 210.7f), module, SineMk1Module::FINE_PARAM));
-		StoermelderTrimpot* tp1 = createParamCentered<StoermelderTrimpot>(Vec(22.5f, 240.1f), module, SineMk1Module::OCT_PARAM);
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 177.0f), module, SineMk1Module::FREQ_PARAM));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 206.5f), module, SineMk1Module::FINE_PARAM));
+		StoermelderTrimpot* tp1 = createParamCentered<StoermelderTrimpot>(Vec(22.5f, 236.0f), module, SineMk1Module::OCT_PARAM);
 		tp1->snap = true;
 		addParam(tp1);
 
-		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 280.6f), module, SineMk1Module::VOCT_INPUT));
-		addOutput(createOutputCentered<StoermelderPort>(Vec(22.5f, 323.8f), module, SineMk1Module::OUTPUT));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 276.4f), module, SineMk1Module::VOCT_INPUT));
+
+		addOutput(createOutputCentered<StoermelderPort>(Vec(22.5f, 318.3f), module, SineMk1Module::OUTPUT));
+		addChild(createLightCentered<SmallLight<RedGreenBlueLight>>(Vec(31.5f, 332.7f), module, SineMk1Module::PHASE_LIGHT));
 	}
 };
 
