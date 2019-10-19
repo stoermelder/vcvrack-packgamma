@@ -8,7 +8,7 @@
 
 The PackGamma plugin gives you some modules for [VCV Rack](https://www.vcvrack.com) using Lance Putnam's [Gamma DSP library](https://github.com/LancePutnam/Gamma).
 
-Currently these modules are purely experimental. Please expect breaking changes at any time.
+Currently these modules are purely experimental. Please expect breaking changes at any time. Nightly builds of the latest commit can be downloaded [here](https://github.com/stoermelder/vcvrack-packgamma/releases/tag/Nightly).
 
 ## Building
 
@@ -16,8 +16,6 @@ Follow the build instructions for [VCV Rack](https://vcvrack.com/manual/Building
 
 ## License
 
-Copyright © 2019 Benjamin Dill
+All **source code** is copyright © 2019 Benjamin Dill and is licensed under the [GNU General Public License, version v3.0](./LICENSE.txt).
 
-Licensed under the [GNU Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.en.html).
-
-The panel graphics in the `res` and `res-src` directories are licensed under CC BY-NC-ND 4.0. You may not distribute modified adaptations of these graphics.
+The **graphics** in the `res` and `res-src` directories are licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). You may not distribute modified adaptations of these graphics.
