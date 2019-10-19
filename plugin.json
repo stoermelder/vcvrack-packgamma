@@ -49,8 +49,8 @@
 			"tags": ["Filter", "Digital"]
 		},
 		{
-			"slug": "RiftGate-Mk1",
-			"name": "Gamma RIFT/GATE Mk1",
+			"slug": "Rift-Mk2",
+			"name": "Gamma RIFT Mk2",
 			"description": "Brickwall bandpass splitter and merger using spectral transform",
 			"tags": ["Filter", "Utility", "Digital"]
 		}

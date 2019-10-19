@@ -7,10 +7,10 @@
 #include "Gamma/DFT.h"
 #pragma GCC diagnostic pop
 
-namespace RiftGate {
+namespace RiftMk2 {
 
 // based on examples/spectral/brickwall.cpp
-struct RiftGateModule : Module {
+struct RiftMk2Module : Module {
 	enum ParamIds {
 		LO_PARAM,
 		LO_OFFSET_PARAM,
@@ -41,7 +41,7 @@ struct RiftGateModule : Module {
 	float prev[PORT_MAX_CHANNELS];
 	float cvs[PORT_MAX_CHANNELS] = {};
 
-	RiftGateModule() :
+	RiftMk2Module() :
 		in1_stft(2048, 2048/4, 0, gam::HANN, gam::COMPLEX),
 		in2_stft(2048, 2048/4, 0, gam::HANN, gam::COMPLEX),
 		out1_stft(2048, 2048/4, 0, gam::HANN, gam::COMPLEX),
@@ -103,32 +103,34 @@ struct RiftGateModule : Module {
 	}
 };
 
-struct RiftGateMk1Widget : ModuleWidget {
-	RiftGateMk1Widget(RiftGateModule* module) {
+struct RiftMk2Widget : ModuleWidget {
+	RiftMk2Widget(RiftMk2Module* module) {
 		setModule(module);
-		setPanel(APP->window->loadSvg(asset::plugin(pluginInstance, "res/RiftGateMk1.svg")));
+		setPanel(APP->window->loadSvg(asset::plugin(pluginInstance, "res/RiftMk2.svg")));
 
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, 0)));
+		addChild(createWidget<MyBlackScrew>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, 0)));
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
+		addChild(createWidget<MyBlackScrew>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 81.6f), module, RiftGateModule::LO_OFFSET_PARAM));
-		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 106.5f), module, RiftGateModule::LO_INPUT));
-		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 131.5f), module, RiftGateModule::LO_PARAM));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 81.6f), module, RiftMk2Module::LO_OFFSET_PARAM));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 106.5f), module, RiftMk2Module::LO_INPUT));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 131.5f), module, RiftMk2Module::LO_PARAM));
 
-		addParam(createParamCentered<StoermelderTrimpot>(Vec(52.5f, 81.6f), module, RiftGateModule::HI_OFFSET_PARAM));
-		addInput(createInputCentered<StoermelderPort>(Vec(52.5f, 106.5f), module, RiftGateModule::HI_INPUT));
-		addParam(createParamCentered<StoermelderTrimpot>(Vec(52.5f, 131.5f), module, RiftGateModule::HI_PARAM));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(52.5f, 81.6f), module, RiftMk2Module::HI_OFFSET_PARAM));
+		addInput(createInputCentered<StoermelderPort>(Vec(52.5f, 106.5f), module, RiftMk2Module::HI_INPUT));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(52.5f, 131.5f), module, RiftMk2Module::HI_PARAM));
 
-		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 183.4f), module, RiftGateModule::IN_INPUT));
-		addOutput(createOutputCentered<StoermelderPort>(Vec(22.5f, 226.9f), module, RiftGateModule::OUTER_OUTPUT));
-		addOutput(createOutputCentered<StoermelderPort>(Vec(52.5f, 226.9f), module, RiftGateModule::INNER_OUTPUT));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 183.4f), module, RiftMk2Module::IN_INPUT));
+		addOutput(createOutputCentered<StoermelderPort>(Vec(22.5f, 226.9f), module, RiftMk2Module::OUTER_OUTPUT));
+		addOutput(createOutputCentered<StoermelderPort>(Vec(52.5f, 226.9f), module, RiftMk2Module::INNER_OUTPUT));
 
-		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 280.6f), module, RiftGateModule::OUTER_INPUT));
-		addInput(createInputCentered<StoermelderPort>(Vec(52.5f, 280.6f), module, RiftGateModule::INNER_INPUT));
-		addOutput(createOutputCentered<StoermelderPort>(Vec(52.5f, 323.8f), module, RiftGateModule::OUT_OUTPUT));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 280.6f), module, RiftMk2Module::OUTER_INPUT));
+		addInput(createInputCentered<StoermelderPort>(Vec(52.5f, 280.6f), module, RiftMk2Module::INNER_INPUT));
+		addOutput(createOutputCentered<StoermelderPort>(Vec(52.5f, 323.8f), module, RiftMk2Module::OUT_OUTPUT));
 	}
 };
 
-} // namespace RiftGateMk1
+} // namespace RiftMk2
 
-Model* modelRiftGateMk1 = createModel<RiftGate::RiftGateModule, RiftGate::RiftGateMk1Widget>("RiftGate-Mk1");
+Model* modelRiftMk2 = createModel<RiftMk2::RiftMk2Module, RiftMk2::RiftMk2Widget>("Rift-Mk2");
