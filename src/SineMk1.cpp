@@ -112,17 +112,17 @@ struct SineMk1Widget : ModuleWidget {
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, 0)));
 		addChild(createWidget<MyBlackScrew>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 83.4f), module, SineMk1Module::FBK_INPUT));
-		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 108.5f), module, SineMk1Module::FBK_PARAM));
-		addParam(createParamCentered<CKSSH>(Vec(22.5f, 139.8f), module, SineMk1Module::FBKTAPER_PARAM));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 74.8f), module, SineMk1Module::FBK_INPUT));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 99.9f), module, SineMk1Module::FBK_PARAM));
+		addParam(createParamCentered<CKSSH>(Vec(22.5f, 131.2f), module, SineMk1Module::FBKTAPER_PARAM));
 
-		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 177.0f), module, SineMk1Module::FREQ_PARAM));
-		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 206.5f), module, SineMk1Module::FINE_PARAM));
-		StoermelderTrimpot* tp1 = createParamCentered<StoermelderTrimpot>(Vec(22.5f, 236.0f), module, SineMk1Module::OCT_PARAM);
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 171.3f), module, SineMk1Module::FREQ_PARAM));
+		addParam(createParamCentered<StoermelderTrimpot>(Vec(22.5f, 200.8f), module, SineMk1Module::FINE_PARAM));
+		StoermelderTrimpot* tp1 = createParamCentered<StoermelderTrimpot>(Vec(22.5f, 230.2f), module, SineMk1Module::OCT_PARAM);
 		tp1->snap = true;
 		addParam(tp1);
 
-		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 276.4f), module, SineMk1Module::VOCT_INPUT));
+		addInput(createInputCentered<StoermelderPort>(Vec(22.5f, 273.4f), module, SineMk1Module::VOCT_INPUT));
 
 		addOutput(createOutputCentered<StoermelderPort>(Vec(22.5f, 318.3f), module, SineMk1Module::OUTPUT));
 		addChild(createLightCentered<SmallLight<RedGreenBlueLight>>(Vec(31.5f, 332.7f), module, SineMk1Module::PHASE_LIGHT));
