@@ -13,3 +13,4 @@ extern Model* modelSineMk1;
 extern Model* modelCheb12Mk1;
 extern Model* modelRiftMk1;
 extern Model* modelRiftMk2;
+extern Model* modelPitch;

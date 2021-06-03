@@ -53,6 +53,12 @@
 			"name": "Gamma RIFT Mk2",
 			"description": "Brickwall bandpass splitter and merger using spectral transform",
 			"tags": ["Filter", "Utility", "Digital"]
+		},
+		{
+			"slug": "Pitch",
+			"name": "Gamma PITCH",
+			"description": "",
+			"tags": []
 		}
 	]
 }

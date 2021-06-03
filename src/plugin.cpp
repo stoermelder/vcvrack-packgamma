@@ -13,4 +13,5 @@ void init(rack::Plugin* p) {
 	p->addModel(modelCheb12Mk1);
 	p->addModel(modelRiftMk1);
 	p->addModel(modelRiftMk2);
+	p->addModel(modelPitch);
 }
