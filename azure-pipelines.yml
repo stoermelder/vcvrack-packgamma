@@ -14,7 +14,7 @@ jobs:
   strategy:
     matrix:
       mac:
-        imageName: 'macos-10.13'
+        imageName: 'macos-10.14'
         isMac: true
       windows:
         imageName: 'vs2017-win2016'
@@ -36,7 +36,7 @@ jobs:
       git submodule update --init --recursive
 
       pushd $AGENT_TEMPDIRECTORY
-      curl -o Rack-SDK.zip https://vcvrack.com/downloads/Rack-SDK-1.1.4.zip
+      curl -o Rack-SDK.zip https://vcvrack.com/downloads/Rack-SDK-1.1.6.zip
       unzip Rack-SDK.zip
       
     displayName: Get Rack 
@@ -45,7 +45,6 @@ jobs:
       chmod +x scripts/resetversion.sh
       ./scripts/resetversion.sh
     displayName: Update Version in plugins.json
-
 
   - bash: |
       export RACK_DIR=$AGENT_TEMPDIRECTORY/Rack-SDK
@@ -66,7 +65,8 @@ jobs:
 
   - bash: |
       export RACK_DIR=$AGENT_TEMPDIRECTORY/Rack-SDK
-      sudo apt-get install libglu-dev
+      sudo apt-get update
+      sudo apt-get install libglu-dev --fix-missing
       make dist
       mkdir products_lin/
       cp dist/*zip products_lin/
