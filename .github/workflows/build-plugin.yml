@@ -52,8 +52,10 @@ jobs:
         run: |
           export PLUGIN_DIR=$GITHUB_WORKSPACE
           pushd ${{ env.rack-plugin-toolchain-dir }}
-          make dep
-          make dist
+          cd $PLUGIN_DIR && make dep
+          cd $PLUGIN_DIR && make dist
+          mkdir -p plugin-build
+          cp $PLUGIN_DIR/dist/*.vcvplugin plugin-build/
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
