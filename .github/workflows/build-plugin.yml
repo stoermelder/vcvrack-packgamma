@@ -52,7 +52,8 @@ jobs:
         run: |
           export PLUGIN_DIR=$GITHUB_WORKSPACE
           pushd ${{ env.rack-plugin-toolchain-dir }}
-          make plugin-build-${{ matrix.platform }}
+          make dep
+          make dist
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
