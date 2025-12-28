@@ -1,5 +1,5 @@
 name: Build VCV Rack Plugin
-on: [push, pull_request]
+on: [push]
 
 env:
   rack-sdk-version: latest
@@ -15,8 +15,8 @@ jobs:
     name: Modify plugin version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         id: plugin-version-cache
         with:
           path: plugin.json
@@ -27,37 +27,48 @@ jobs:
           echo "Set plugin version from $pluginversion to $pluginversion-$gitrev"
           cat <<< `jq --arg VERSION "$pluginversion-$gitrev" '.version=$VERSION' plugin.json` > plugin.json
         # only modify plugin version if no tag was created
-        if: "! startsWith(github.ref, 'refs/tags/v')"
+        if: "!startsWith(github.ref, 'refs/tags/v')"
 
   build:
     name: ${{ matrix.platform }}
     needs: modify-plugin-version
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/qno/rack-plugin-toolchain-win-linux
+      image: ghcr.io/bloodbat/rack-plugin-toolchain-win-linux
       options: --user root
     strategy:
       matrix:
         platform: [win-x64, lin-x64]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         id: plugin-version-cache
         with:
           path: plugin.json
           key: ${{ github.sha }}-${{ github.run_id }}
+      - name: Install required dependencies
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends \
+            g++-multilib \
+            libc6-dev \
+            libstdc++-11-dev \
+            gcc-multilib \
+            libc6-dev-i386
+        shell: bash
       - name: Build plugin
         run: |
           export PLUGIN_DIR=$GITHUB_WORKSPACE
+          # When running the Windows matrix job, signal the Makefile to apply
+          # the Gamma Windows override via GAMMA_WINDOWS=1. This keeps logic
+          # centralized in the project's Makefile.
+          if [ "${{ matrix.platform }}" = "win-x64" ]; then export GAMMA_WINDOWS=1; fi
           pushd ${{ env.rack-plugin-toolchain-dir }}
-          cd $PLUGIN_DIR && make dep
-          cd $PLUGIN_DIR && make dist
-          mkdir -p plugin-build
-          cp $PLUGIN_DIR/dist/*.vcvplugin plugin-build/
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          make plugin-build-${{ matrix.platform }} GAMMA_WINDOWS="$GAMMA_WINDOWS"
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: ${{ env.rack-plugin-toolchain-dir }}/plugin-build
           name: ${{ matrix.platform }}
@@ -71,10 +82,10 @@ jobs:
       matrix:
         platform: [x64, arm64]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         id: plugin-version-cache
         with:
           path: plugin.json
@@ -93,7 +104,7 @@ jobs:
           make dep
           make dist
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: dist/*.vcvplugin
           name: mac-${{ matrix.platform }}
@@ -106,7 +117,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, build-mac]
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4.1.7
         with:
           path: _artifacts
       - name: Delete old release assets

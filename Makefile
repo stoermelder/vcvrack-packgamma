@@ -18,24 +18,22 @@ OBJECTS += dep/Gamma/build/lib/libGamma.a
 DEP_LOCAL := dep
 DEPS += $(gamma)
 
+
+# Ensure the Gamma build depends on the Makefile.user when cross-compiling
+ifneq ($(strip $(GAMMA_WINDOWS)),)
+GAMMA_MAKEFILE_USER := dep/Gamma/Makefile.user
+
+$(GAMMA_MAKEFILE_USER):
+	mkdir -p dep/Gamma
+	@printf '%s\n' '# Force Windows platform for Gamma build and avoid adding host /usr includes' 'PLATFORM := windows' > $@
+
+$(gamma): $(GAMMA_MAKEFILE_USER)
+endif
+
 $(gamma):
+	mkdir -p dep/Gamma
+	git submodule update --init --recursive dep/Gamma
 	cd dep/Gamma && $(MAKE) NO_AUDIO_IO=1 NO_SOUNDFILE=1
 
 
 include $(RACK_DIR)/plugin.mk
-
-
-win-dist: all
-	rm -rf dist
-	mkdir -p dist/$(SLUG)
-	@# Strip and copy plugin binary
-	cp $(TARGET) dist/$(SLUG)/
-ifdef ARCH_MAC
-	$(STRIP) -S dist/$(SLUG)/$(TARGET)
-else
-	$(STRIP) -s dist/$(SLUG)/$(TARGET)
-endif
-	@# Copy distributables
-	cp -R $(DISTRIBUTABLES) dist/$(SLUG)/
-	@# Create vcvplugin package
-	cd dist && tar -c $(SLUG) | zstd -$(ZSTD_COMPRESSION_LEVEL) -o "$(SLUG)"-"$(VERSION)"-$(ARCH_OS_NAME).vcvplugin
