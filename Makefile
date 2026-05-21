@@ -15,7 +15,7 @@ gamma := dep/Gamma/build/lib/libGamma.a
 OBJECTS += dep/Gamma/build/lib/libGamma.a
 
 # Dependencies
-DEP_LOCAL := dep
+DEP_LOCAL := build/.dep
 DEPS += $(gamma)
 
 
@@ -31,8 +31,6 @@ $(gamma): $(GAMMA_MAKEFILE_USER)
 endif
 
 $(gamma):
-	mkdir -p dep/Gamma
-	git submodule update --init --recursive dep/Gamma
 	cd dep/Gamma && $(MAKE) NO_AUDIO_IO=1 NO_SOUNDFILE=1
 
 
